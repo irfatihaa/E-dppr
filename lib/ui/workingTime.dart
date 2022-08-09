@@ -92,7 +92,7 @@ class workingTime extends StatelessWidget {
           seriesList,
           animate: animate,
           barGroupingType: charts.BarGroupingType.groupedStacked,
-          behaviors: [charts.SeriesLegend(position: charts.BehaviorPosition.bottom,
+          behaviors: [charts.SeriesLegend(position: charts.BehaviorPosition.top,
           entryTextStyle: const charts.TextStyleSpec(color: charts.Color(r: 0, g: 0, b: 0),
           fontSize: 11),
           desiredMaxRows: 2,
@@ -107,11 +107,11 @@ class workingTime extends StatelessWidget {
   /// Create series list with multiple series
   static List<charts.Series<Summary, String>> _createSampleData() {
     final planWorkMinA = [
-      Summary('Feb 1', 0),
-      Summary('Feb 2', 0),
-      Summary('Feb 3', 0),
-      Summary('Feb 4', 0),
-      Summary('Feb 5', 0),
+      Summary('Feb 1', 490),
+      Summary('Feb 2', 490),
+      Summary('Feb 3', 490),
+      Summary('Feb 4', 490),
+      Summary('Feb 5', 490),
       Summary('Feb 6', 0),
       Summary('Feb 7', 480),
       Summary('Feb 8', 495),
@@ -139,11 +139,11 @@ class workingTime extends StatelessWidget {
 
     final planOvertimeA = [
       Summary('Feb 1', 0),
-      Summary('Feb 2', 0),
-      Summary('Feb 3', 0),
-      Summary('Feb 4', 0),
-      Summary('Feb 5', 0),
-      Summary('Feb 6', 0),
+      Summary('Feb 2', 90),
+      Summary('Feb 3', 90),
+      Summary('Feb 4', 120),
+      Summary('Feb 5', 120),
+      Summary('Feb 6', 120),
       Summary('Feb 7', 0),
       Summary('Feb 8', 90),
       Summary('Feb 9', 90),
@@ -169,12 +169,12 @@ class workingTime extends StatelessWidget {
     ];
 
     final planPDTA = [
-      Summary('Feb 1', 0),
-      Summary('Feb 2', 0),
-      Summary('Feb 3', 0),
-      Summary('Feb 4', 0),
-      Summary('Feb 5', 0),
-      Summary('Feb 6', 0),
+      Summary('Feb 1', 15),
+      Summary('Feb 2', 15),
+      Summary('Feb 3', 15),
+      Summary('Feb 4', 15),
+      Summary('Feb 5', 15),
+      Summary('Feb 6', 15),
       Summary('Feb 7', 0),
       Summary('Feb 8', 15),
       Summary('Feb 9', 15),
@@ -200,11 +200,11 @@ class workingTime extends StatelessWidget {
     ];
 
     final actualWorkMinB = [
-      Summary('Feb 1', 0),
-      Summary('Feb 2', 0),
-      Summary('Feb 3', 0),
-      Summary('Feb 4', 0),
-      Summary('Feb 5', 0),
+      Summary('Feb 1', 490),
+      Summary('Feb 2', 490),
+      Summary('Feb 3', 490),
+      Summary('Feb 4', 490),
+      Summary('Feb 5', 490),
       Summary('Feb 6', 0),
       Summary('Feb 7', 480),
       Summary('Feb 8', 495),
@@ -232,11 +232,11 @@ class workingTime extends StatelessWidget {
 
     final actualOvertimeB = [
       Summary('Feb 1', 0),
-      Summary('Feb 2', 0),
-      Summary('Feb 3', 0),
-      Summary('Feb 4', 0),
-      Summary('Feb 5', 0),
-      Summary('Feb 6', 0),
+      Summary('Feb 2', 90),
+      Summary('Feb 3', 90),
+      Summary('Feb 4', 120),
+      Summary('Feb 5', 120),
+      Summary('Feb 6', 120),
       Summary('Feb 7', 0),
       Summary('Feb 8', 120),
       Summary('Feb 9', 0),
@@ -262,13 +262,13 @@ class workingTime extends StatelessWidget {
     ];
 
     final actualPDTB = [
-      Summary('Feb 1', 0),
-      Summary('Feb 2', 0),
-      Summary('Feb 3', 0),
-      Summary('Feb 4', 0),
-      Summary('Feb 5', 0),
-      Summary('Feb 6', 0),
-      Summary('Feb 7', 5),
+      Summary('Feb 1', 5),
+      Summary('Feb 2', 5),
+      Summary('Feb 3', 15),
+      Summary('Feb 4', 15),
+      Summary('Feb 5', 15),
+      Summary('Feb 6', 5),
+      Summary('Feb 7', 0),
       Summary('Feb 8', 5),
       Summary('Feb 9', 24),
       Summary('Feb 10', 320),

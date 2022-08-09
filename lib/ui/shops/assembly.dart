@@ -3,13 +3,88 @@ import 'package:flutter/material.dart';
 import 'package:untitled/ui/production.dart';
 import 'package:untitled/ui/opr.dart';
 import 'package:untitled/ui/workingTime.dart';
+import 'package:month_year_picker/month_year_picker.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 
-class A2 extends StatelessWidget {
-  A2({Key key}) : super(key: key);
+
+class A2 extends StatefulWidget {
+  DateTime initialDate;
+
+  A2({Key key, this.initialDate}) : super(key: key);
+  //A2({Key key}) : super(key: key);
+  @override//
+  State<A2> createState() => _A2();
+}
+
+class _A2 extends State<A2> {
+  //DateTime _selected;
+  //DateTime selectedDate = DateTime.now();
+  //final DateTime initialDate = DateTime.now();
+  DateTime selectedDate;
+
+  // Future<void> _selectDate(BuildContext context, String locale) async {
+  //   final localeObj = locale != null ? Locale(locale) : null;
+  //   final DateTime picked = await showMonthYearPicker(
+  //       context: context,
+  //       initialDate: selectedDate,
+  //       firstDate: DateTime(2021, 11),
+  //       lastDate: DateTime(2022, 08),
+  //       locale: localeObj,
+  //   );
+  //
+  //   if (picked != null && picked != selectedDate) {
+  //     setState(() {
+  //       selectedDate = picked;
+  //     });
+  //   }
+  // }
+
+  // Future<void> _onPressed (BuildContext context, String locale) async {
+  //   final localeObj = locale != null ? Locale(locale) : null;
+  //   final selected = await showMonthYearPicker(
+  //     context: context,
+  //     initialDate: _selected ?? DateTime.now(),
+  //     firstDate: DateTime(2019),
+  //     lastDate: DateTime(2022),
+  //     locale: localeObj,
+  //   );
+  //   if (selected != null) {
+  //     setState(() {
+  //       _selected = selected;
+  //     });
+  //   }
+  // }
+
+
+  // // Initial Selected Value
+  // String dropdownvalue = 'January 2022';
+  // // List of items in our dropdown menu
+  // var items = [
+  //   'January 2022',
+  //   'February 2022',
+  //   'March 2022',
+  //   'April 2022',
+  //   'May 2022',
+  //   'June 2022',
+  //   'July 2022',
+  //   'Aug 2022',
+  // ];
+  @override
+  void initState() {
+    super.initState();
+    selectedDate = widget.initialDate;
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        localizationsDelegates: const [
+          GlobalWidgetsLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          MonthYearPickerLocalizations.delegate,
+        ],
         theme: ThemeData(
           scaffoldBackgroundColor: const Color(0xffffffff),),
         debugShowCheckedModeBanner: false,
@@ -36,18 +111,78 @@ class A2 extends StatelessWidget {
                     ],
                   ),
                 ),
-                body: TabBarView(
-                  children: [
-                    Production.withSampleData(),
-                    Operation.withSampleData(),
-                    workingTime.withSampleData(),
-                    //ShiftA(),
-                    //ShiftB(),
-                  ],
-                )
-            )));
+                body:
+                // Column(
+                //      children: [
+                      // ElevatedButton(
+                      //   onPressed: () => _selectDate(context),
+                      //   child: const Text('Select date'),
+                      //   style: ElevatedButton.styleFrom(
+                      //       primary: Colors.deepPurple,
+                      //       padding: const EdgeInsets.symmetric(
+                      //           horizontal: 30, vertical: 10),
+                      //       textStyle:
+                      //       const TextStyle(
+                      //           fontSize: 20, fontWeight: FontWeight.bold)),
+                      // ),
+                      // Text("${selectedDate.toLocal()}".split(' ')[0],
+                      //   style: const TextStyle(
+                      //       fontSize: 20, fontWeight: FontWeight.bold),
+                      // ),
+                      TabBarView(
+                          children: [
+                            Production.withSampleData(),
+                            Operation.withSampleData(),
+                            workingTime.withSampleData(),
+                            //ShiftA(),
+                            //ShiftB(),
+                          ]),
+                floatingActionButton: Builder(
+                  builder: (context) => FloatingActionButton(
+                    backgroundColor: Colors.deepPurple,
+                    onPressed: () {
+                      showMonthPicker(
+                        context: context,
+                        firstDate: DateTime(DateTime.now().year - 1, 5),
+                        lastDate: DateTime(DateTime.now().year + 3, 5),
+                        initialDate: DateTime.now(),
+                        locale: Locale("en"),
+                      ).then((date) {
+                        if (date != null) {
+                          setState(() {
+                            selectedDate = date;
+                          });
+                        }
+                      });
+                    },
+                    child: Icon(Icons.calendar_month_outlined),
+                  ),
+                ),
+            ))
+    );
   }
 }
+
+
+// Future<void> _onPressed({
+//   BuildContext context,
+//   String locale,
+// }) async {
+//   final localeObj = locale != null ? Locale(locale) : null;
+//   final selected = await showMonthYearPicker(
+//     context: context,
+//     initialDate: _selected ?? DateTime.now(),
+//     firstDate: DateTime(2019),
+//     lastDate: DateTime(2022),
+//     locale: localeObj,
+//   );
+//   if (selected != null) {
+//     setState(() {
+//       _selected = selected;
+//     });
+//}
+
+
 
 
 
@@ -155,4 +290,3 @@ class A2 extends StatelessWidget {
 //   final int sales;
 //
 //   OrdinalSales(this.year, this.sales);
-// }

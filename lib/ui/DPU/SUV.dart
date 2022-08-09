@@ -2,18 +2,18 @@ import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class Myvi extends StatelessWidget {
+class SUV extends StatelessWidget {
   final List<charts.Series> seriesList;
   final bool animate;
 
-  Myvi(this.seriesList, {this.animate});
+  SUV(this.seriesList, {this.animate});
 
   /// Creates a [BarChart] with sample data and no transition.
-  factory Myvi.withSampleData() {
-    return Myvi(
+  factory SUV.withSampleData() {
+    return SUV(
       _createSampleData(),
       // Disable animations for image tests.
-      animate: true,
+      animate: false,
 
     );
   }
@@ -45,23 +45,22 @@ class Myvi extends StatelessWidget {
   }
 
   /// Create one series with sample hard coded data.
-
-  static List<charts.Series<MyviDPU, DateTime>> _createSampleData() {
+  static List<charts.Series<SUVDPU, DateTime>> _createSampleData() {
     final data = [
-      MyviDPU(DateTime(2022, 5, 1), 0.031),
-      MyviDPU(DateTime(2022, 5, 2), 0.025),
-      MyviDPU(DateTime(2022, 5, 3), 0.021),
-      MyviDPU(DateTime(2022, 5, 4), 0.024),
-      MyviDPU(DateTime(2022, 5, 5), 0.028),
+      SUVDPU(DateTime(2022, 5, 1), 0.031),
+      SUVDPU(DateTime(2022, 5, 2), 0.025),
+      SUVDPU(DateTime(2022, 5, 3), 0.021),
+      SUVDPU(DateTime(2022, 5, 4), 0.024),
+      SUVDPU(DateTime(2022, 5, 5), 0.028),
 
     ];
 
     return [
-      charts.Series<MyviDPU, DateTime>(
+      charts.Series<SUVDPU, DateTime>(
         id: 'Defect',
         colorFn: (_, __) => charts.MaterialPalette.deepOrange.shadeDefault,
-        domainFn: (MyviDPU defect, _) => defect.date,
-        measureFn: (MyviDPU defect, _) => defect.defect,
+        domainFn: (SUVDPU defect, _) => defect.date,
+        measureFn: (SUVDPU defect, _) => defect.defect,
         data: data,
       )
     ];
@@ -106,11 +105,10 @@ class Myvi extends StatelessWidget {
 // }
 
 /// Sample ordinal data type.
-class MyviDPU {
+class SUVDPU {
 
   final DateTime date;
   final double defect;
 
-  MyviDPU(this.date, this.defect);
+  SUVDPU(this.date, this.defect);
 }
-

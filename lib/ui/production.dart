@@ -31,7 +31,7 @@ class Production extends StatelessWidget {
           barGroupingType: charts.BarGroupingType.grouped,
           //dateTimeFactory: charts.LocalDateTimeFactory(),
           behaviors:
-          [charts.SeriesLegend(position: charts.BehaviorPosition.bottom)],
+          [charts.SeriesLegend(position: charts.BehaviorPosition.top)],
           customSeriesRenderers: [
             charts.BarTargetLineRendererConfig<String>(
               // ID used to link series to this renderer.
@@ -46,12 +46,12 @@ class Production extends StatelessWidget {
   static List<charts.Series<ProdSales, String>> _createSampleData() {
 
     final aProductionData = [
-      ProdSales('Feb 1', 0),
-      ProdSales('Feb 2', 0),
-      ProdSales('Feb 3', 0),
-      ProdSales('Feb 4', 0),
-      ProdSales('Feb 5', 0),
-      ProdSales('Feb 6', 0),
+      ProdSales('Feb 1', 211),
+      ProdSales('Feb 2', 252),
+      ProdSales('Feb 3', 252),
+      ProdSales('Feb 4', 190),
+      ProdSales('Feb 5', 190),
+      ProdSales('Feb 6', 190),
       ProdSales('Feb 7', 211),
       ProdSales('Feb 8', 252),
       ProdSales('Feb 9', 252),

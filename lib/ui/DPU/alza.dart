@@ -1,5 +1,6 @@
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Alza extends StatelessWidget {
   final List<charts.Series> seriesList;
@@ -19,41 +20,94 @@ class Alza extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return charts.BarChart(
+    final simpleFormatter =
+    charts.BasicNumericTickFormatterSpec.fromNumberFormat(NumberFormat.decimalPattern());
+    return charts.TimeSeriesChart(
       seriesList,
       animate: animate,
+      domainAxis: const charts.DateTimeAxisSpec(
+        tickProviderSpec: charts.DayTickProviderSpec(increments: [1]),
+        tickFormatterSpec: charts.AutoDateTimeTickFormatterSpec(
+            day: charts.TimeFormatterSpec(
+              format: 'd', transitionFormat: 'MMM d',)),
+      ),
+      primaryMeasureAxis: charts.NumericAxisSpec(
+          tickFormatterSpec: simpleFormatter,
+          tickProviderSpec: const charts.BasicNumericTickProviderSpec(
+            desiredTickCount: 5,
+            dataIsInWholeNumbers: false,)),
+      // Set the default renderer to a bar renderer.
+      defaultRenderer: charts.BarRendererConfig<DateTime>(),
+      defaultInteractions: false,
+      behaviors: [charts.SelectNearest(), charts.DomainHighlighter()],
     );
   }
 
   /// Create one series with sample hard coded data.
-  static List<charts.Series<OrdinalSales, String>> _createSampleData() {
+  static List<charts.Series<AlzaDPU, DateTime>> _createSampleData() {
     final data = [
-      OrdinalSales('Feb 1', 0.00037),
-      OrdinalSales('Feb 2', 0.00010),
-      OrdinalSales('Feb 3', 0.00059),
-      OrdinalSales('Feb 4', 0.00103),
-      OrdinalSales('Feb 5', 0.00025),
-      OrdinalSales('Feb 6', 0.00077),
-      OrdinalSales('Feb 7', 0.00062),
+      AlzaDPU(DateTime(2022, 5, 1), 0.031),
+      AlzaDPU(DateTime(2022, 5, 2), 0.025),
+      AlzaDPU(DateTime(2022, 5, 3), 0.021),
+      AlzaDPU(DateTime(2022, 5, 4), 0.024),
+      AlzaDPU(DateTime(2022, 5, 5), 0.028),
 
     ];
 
     return [
-      charts.Series<OrdinalSales, String>(
-        id: 'Sales',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (OrdinalSales sales, _) => sales.year,
-        measureFn: (OrdinalSales sales, _) => sales.sales,
+      charts.Series<AlzaDPU, DateTime>(
+        id: 'Defect',
+        colorFn: (_, __) => charts.MaterialPalette.deepOrange.shadeDefault,
+        domainFn: (AlzaDPU defect, _) => defect.date,
+        measureFn: (AlzaDPU defect, _) => defect.defect,
         data: data,
       )
     ];
   }
 }
 
-/// Sample ordinal data type.
-class OrdinalSales {
-  final String year;
-  final double sales;
 
-  OrdinalSales(this.year, this.sales);
+//   static List<charts.Series<MyviDPU, String>> _createSampleData() {
+//     final data = [
+//       MyviDPU('Feb1', 0.019),
+//       MyviDPU('Feb2', 0.010),
+//       MyviDPU('Feb3', 0.059),
+//       MyviDPU('Feb4', 0.032),
+//       MyviDPU('Feb5', 0.025),
+//
+//     ];
+//
+//     return [
+//       charts.Series<MyviDPU, String>(
+//         id: 'Defect',
+//         colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+//         domainFn: (MyviDPU defect, _) => defect.date,
+//         measureFn: (MyviDPU defect, _) => defect.defect,
+//         data: data,
+//       )
+//     ];
+//   }
+// }
+
+// List<charts.TickSpec<num>> _createTickSpec() {
+//
+//   List<charts.TickSpec<num>> _tickProvideSpecs = List<charts.TickSpec<num>>();
+//   List<charts.TickSpec<num>>();
+//   var minVal = 0.01;
+//   var maxVal = 0.10;
+//   double d = minVal;
+//   while (d <= maxVal) {
+//     _tickProvideSpecs.add(charts.TickSpec(d,
+//         label: '$d%', style: charts.TextStyleSpec(fontSize: 14)));
+//       d += 0.01;
+//   }
+// }
+
+/// Sample ordinal data type.
+class AlzaDPU {
+
+  final DateTime date;
+  final double defect;
+
+  AlzaDPU(this.date, this.defect);
 }

@@ -59,9 +59,28 @@ import 'package:flutter/material.dart';
 import 'package:untitled/ui/production.dart';
 import 'package:untitled/ui/workingTime.dart';
 import 'package:untitled/ui/opr.dart';
+import 'package:month_year_picker/month_year_picker.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 
-class DO extends StatelessWidget {
-  DO({Key key}) : super(key: key);
+
+class DO extends StatefulWidget {
+  DateTime initialDate;
+
+  DO({Key key, this.initialDate}) : super(key: key);
+  @override//
+  State<DO> createState() => _DO();
+}
+
+class _DO extends State<DO> {
+  DateTime selectedDate;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedDate = widget.initialDate;
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +119,28 @@ class DO extends StatelessWidget {
                     //ShiftA(),
                     //ShiftB(),
                   ],
-                )
-            )));
+                ),
+                floatingActionButton: Builder(
+                builder: (context) =>
+                  FloatingActionButton(
+                  backgroundColor: Colors.deepPurple,
+                  onPressed: () {
+                    showMonthPicker(
+                      context: context,
+                      firstDate: DateTime(DateTime.now().year - 1, 5),
+                      lastDate: DateTime(DateTime.now().year + 3, 5),
+                      initialDate: DateTime.now(),
+                      locale: const Locale("en"),).then((date) {
+                      if (date != null) {
+                        setState(() {
+                          selectedDate = date;
+                        });
+                      }
+                      });
+                    },
+                      child: const Icon(Icons.calendar_month_outlined),
+                ),
+            ),
+        )));
   }
 }

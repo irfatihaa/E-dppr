@@ -1,10 +1,8 @@
-//import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:untitled/ui/DPU/alza.dart';
-import 'package:untitled/ui/DPU/aruz.dart';
+import 'package:untitled/ui/DPU/SUV.dart';
 import 'package:untitled/ui/DPU/myvi.dart';
-import 'package:untitled/ui/DPU/rush.dart';
-//import 'package:flutter/services.dart';
+import 'package:untitled/ui/DPU/sirion.dart';
 
 
 
@@ -15,6 +13,9 @@ class DPUmodel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 20) / 2;
+    final double itemWidth = size.width / 2;
     return MaterialApp(
         home: Scaffold(
             backgroundColor: Colors.white,
@@ -34,37 +35,73 @@ class DPUmodel extends StatelessWidget {
                 color: Colors.white,
                 child: GridView.count(
                     primary: false,
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(15),
+                    childAspectRatio: (itemWidth / itemHeight),
                     crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 1,
+                    mainAxisSpacing: 15,
+                    crossAxisCount: 2,
                     children: <Widget>[
                       Container(
-                        padding: const EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(1),
                         color: Colors.deepPurple[50],
-                        child: Rush.withSampleData(),
-                      ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            const Text('Myvi',style: TextStyle(color: Colors.black,fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Expanded(
+                            child: Container(
+                            padding: const EdgeInsets.only(top: 5),
+                              child: Myvi.withSampleData(),
+                            ))]
+                        )),
                       Container(
-                        //height: 70,
-                        padding: const EdgeInsets.all(8),
-                        color: Colors.deepPurple[100],
-                        child: Myvi.withSampleData(),
-                      ),
+                        padding: const EdgeInsets.all(1),
+                          color: Colors.deepPurple[50],
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                          const Text('Sirion',style: TextStyle(color: Colors.black,fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Expanded(
+                            child: Container(
+                            padding: const EdgeInsets.only(top: 10),
+                              child: Sirion.withSampleData(),
+                            ))]
+                        )),
                       Container(
-                          padding: const EdgeInsets.all(8),
-                          color: Colors.deepPurple[150],
-                          child: Alza.withSampleData()
-                      ),
+                          padding: const EdgeInsets.all(1), color: Colors.deepPurple[50],
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                const Text('D27A',style: TextStyle(color: Colors.black,fontSize: 16, fontWeight: FontWeight.bold),
+                                ),
+                                Expanded(
+                                    child: Container(
+                                      //padding: const EdgeInsets.only(top: 10),
+                                      child: Alza.withSampleData(),
+                                    ))]
+                          )),
                       Container(
-                          padding: const EdgeInsets.all(8),
-                          color: Colors.deepPurple[200],
-                          child: Aruz.withSampleData()
-                        //   charts.BarChart(
-                        //     seriesList,
-                        //     animate: animate,
-                        // )
-                      ),
-                    ]))));
+                          padding: const EdgeInsets.all(1), color: Colors.deepPurple[50],
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                const Text('SUV',style: TextStyle(color: Colors.black,fontSize: 16, fontWeight: FontWeight.bold),
+                                ),
+                                Expanded(
+                                    child: Container(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: SUV.withSampleData(),
+                                    ))]
+                          )),
+                          // charts.BarChart(
+                          //   seriesList,
+                          //   animate: animate,
+                        ])
+                    //]
+        )));
+    //));
   }
 }
 

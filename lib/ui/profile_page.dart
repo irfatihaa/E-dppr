@@ -1,9 +1,10 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'login.dart';
-import 'register.dart';
-import 'splashscreen.dart';
+// import 'package:flutter/services.dart';
+// import 'login.dart';
+// import 'register.dart';
+// import 'splashscreen.dart';
+import 'update.dart';
 import '../ui/widgets/header_widget.dart';
 
 class ProfilePage extends StatefulWidget{
@@ -45,20 +46,15 @@ class _ProfilePageState extends State<ProfilePage>{
               padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
               child: Column(
                 children: [
-                  const SizedBox(height: 20,),
-                  const Text('Irfatiha Ismail', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),),
-                  const SizedBox(height: 20,),
-                  const Text('Student', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
-                  const SizedBox(height: 10,),
                   Container(
                     padding: const EdgeInsets.all(10),
                     child: Column(
                       children: <Widget>[
                         Container(
-                          padding: const EdgeInsets.only(left: 8.0, bottom: 4.0),
-                          alignment: Alignment.topLeft,
+                          padding: const EdgeInsets.only(left: 8.0, bottom: 15.0),
+                          alignment: Alignment.center,
                           child: const Text("User Information",
-                            style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w500, fontSize: 16
+                            style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w500, fontSize: 20
                             ),
                             textAlign: TextAlign.left
                           ),
@@ -71,30 +67,45 @@ class _ProfilePageState extends State<ProfilePage>{
                               children: <Widget>[
                                 Column(
                                   children: <Widget>[
-                                    ...ListTile.divideTiles(color: Colors.grey, tiles: [
-                                        const ListTile(
-                                          leading: Icon(Icons.email),
-                                          title: Text("Email"),
-                                          subtitle: Text("irfatihaismail@gmail.com"),
-                                        ),
-                                        const ListTile(
-                                          leading: Icon(Icons.phone),
-                                          title: Text("Phone"),
-                                          subtitle: Text("99--99876-56"),
-                                        ),
-                                        const ListTile(
-                                          leading: Icon(Icons.person),
-                                          title: Text("Designation"),
-                                          subtitle: Text("Student"),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                )
+                                ...ListTile.divideTiles(color: Colors.grey, tiles: [
+                                const ListTile(
+                                leading: Icon(Icons.numbers_rounded),
+                                title: Text("Staff ID"),
+                                subtitle: Text("721708"),
+                                ),
+                                const ListTile(
+                                leading: Icon(Icons.account_circle),
+                                title: Text("User name"),
+                                subtitle: Text("Sharifah Irfatiha"),
+                                ),
+                                const ListTile(
+                                leading: Icon(Icons.email),
+                                title: Text("Email"),
+                                subtitle: Text("irfatiha@gmail.com"),
+                                ),
+                                const ListTile(
+                                leading: Icon(Icons.work),
+                                title: Text("Designation"),
+                                subtitle: Text("Student"),
+                                ),
+                                ],),
+                                ],)
                               ],
-                            ),
                           ),
-                        )
+                        ),
+                        ),
+                        Container(
+                            height: 50,
+                            padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                            child: ElevatedButton(
+                              child: const Text('Edit Profile'),
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Update()),
+                                );
+                                //color: Colors.purpleAccent;
+                              },
+                            )
+                        ),
                       ],
                     ),
                   )

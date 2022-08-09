@@ -41,7 +41,7 @@ class Operation extends StatelessWidget {
           tickProviderSpec: const charts.BasicNumericTickProviderSpec(
           desiredMinTickCount: 5,
           desiredTickCount: 5,
-          dataIsInWholeNumbers: true,
+          dataIsInWholeNumbers: false,
           zeroBound: true,
           )),
           // defaultRenderer: charts.BarRendererConfig<DateTime>(
@@ -51,7 +51,7 @@ class Operation extends StatelessWidget {
           behaviors: [
             // LinePointHighlighter(
             //   symbolRenderer: CustomCircleSymbolRenderer()),
-            charts.SeriesLegend(position: charts.BehaviorPosition.bottom,
+            charts.SeriesLegend(position: charts.BehaviorPosition.top,
             entryTextStyle: const charts.TextStyleSpec(
               color: const charts.Color(r: 19, g: 9, b: 29),
               fontSize: 12),),
@@ -72,12 +72,12 @@ class Operation extends StatelessWidget {
   /// Create one series with sample hard coded data.
   static List<charts.Series<TimeSeriesSales, DateTime>> _createSampleLineData() {
     final plan = [
-      TimeSeriesSales(DateTime(2021, 2,1), 0),
-      TimeSeriesSales(DateTime(2021, 2,2), 0),
-      TimeSeriesSales(DateTime(2021, 2,3), 0),
-      TimeSeriesSales(DateTime(2021, 2,4), 0),
-      TimeSeriesSales(DateTime(2021, 2,5), 0),
-      TimeSeriesSales(DateTime(2021, 2,6), 0),
+      TimeSeriesSales(DateTime(2021, 2,1), 92),
+      TimeSeriesSales(DateTime(2021, 2,2), 90),
+      TimeSeriesSales(DateTime(2021, 2,3), 90),
+      TimeSeriesSales(DateTime(2021, 2,4), 90),
+      TimeSeriesSales(DateTime(2021, 2,5), 93),
+      TimeSeriesSales(DateTime(2021, 2,6), 93),
       TimeSeriesSales(DateTime(2021, 2,7), 92),
       TimeSeriesSales(DateTime(2021, 2,8), 92),
       TimeSeriesSales(DateTime(2021, 2,9), 92),
@@ -103,12 +103,12 @@ class Operation extends StatelessWidget {
     ];
 
     final actual = [
-      TimeSeriesSales(DateTime(2021, 2,1), 0),
-      TimeSeriesSales(DateTime(2021, 2,2), 0),
-      TimeSeriesSales(DateTime(2021, 2,3), 0),
-      TimeSeriesSales(DateTime(2021, 2,4), 0),
-      TimeSeriesSales(DateTime(2021, 2,5), 0),
-      TimeSeriesSales(DateTime(2021, 2,6), 0),
+      TimeSeriesSales(DateTime(2021, 2,1), 83),
+      TimeSeriesSales(DateTime(2021, 2,2), 83),
+      TimeSeriesSales(DateTime(2021, 2,3), 87),
+      TimeSeriesSales(DateTime(2021, 2,4), 82),
+      TimeSeriesSales(DateTime(2021, 2,5), 91),
+      TimeSeriesSales(DateTime(2021, 2,6), 85),
       TimeSeriesSales(DateTime(2021, 2,7), 77),
       TimeSeriesSales(DateTime(2021, 2,8), 73),
       TimeSeriesSales(DateTime(2021, 2,9), 78),

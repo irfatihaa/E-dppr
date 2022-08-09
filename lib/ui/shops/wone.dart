@@ -2,64 +2,96 @@ import 'package:flutter/material.dart';
 import 'package:untitled/ui/production.dart';
 import 'package:untitled/ui/opr.dart';
 import 'package:untitled/ui/workingTime.dart';
-//import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:month_year_picker/month_year_picker.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 
-// class Wone extends StatefulWidget {
-//   final List<charts.Series> seriesList;
-//   final bool animate;
 
-//   const Wone(this.seriesList, {this.animate});
-//   //const Wone({Key key}) : super(key: key);
-//   @override
-//   _Wone createState() => Wone(seriesList);
-// }
-//
-// class _Wone extends State<Wone> {
-//   _Wone();
+class Wone extends StatefulWidget {
+  DateTime initialDate;
 
-class Wone extends StatelessWidget {
-  Wone({Key key}) : super(key: key);
+  Wone({Key key, this.initialDate}) : super(key: key);
+  //A2({Key key}) : super(key: key);
+  @override//
+  State<Wone> createState() => _Wone();
+}
+
+class _Wone extends State<Wone> {
+  DateTime selectedDate;
+
   @override
+  void initState() {
+    super.initState();
+    selectedDate = widget.initialDate;
+  }
+
 
   Widget build(BuildContext context) {
-      return MaterialApp(
-          theme: ThemeData(
-            scaffoldBackgroundColor: const Color(0xffffffff),),
-          debugShowCheckedModeBanner: false,
-          home: DefaultTabController(
-              length: 3,
-              child: Scaffold(
-                  appBar: AppBar(
-                    //backgroundColor: Colors.deepPurple,
-                    leading: IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.white),
-                      onPressed: () => Navigator.of(context).pop(),
-                    ),
-                    title: const Text("Production by Shops",
-                        style: TextStyle(color: Colors.white)),
-                    elevation: 0.5,
-                    iconTheme: const IconThemeData(color: Colors.white),
-                    backgroundColor: const Color(0xff4a148c),
+    return MaterialApp(
+        localizationsDelegates: const [
+          GlobalWidgetsLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          MonthYearPickerLocalizations.delegate,
+        ],
+        theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xffffffff),),
+        debugShowCheckedModeBanner: false,
+        home: DefaultTabController(
+            length: 3,
+            child: Scaffold(
+              appBar: AppBar(
+                //backgroundColor: Colors.deepPurple,
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+                title: const Text("Production by Shops",
+                    style: TextStyle(color: Colors.white)),
+                elevation: 0.5,
+                iconTheme: const IconThemeData(color: Colors.white),
+                backgroundColor: const Color(0xff4a148c),
 
-                    bottom: const TabBar(
-                      tabs: [
-                        Tab(text: "Total Production "),
-                        Tab(text: "Operation Rate"),
-                        Tab(text: "Working Time"),
-                      ],
+                bottom: const TabBar(
+                  tabs: [
+                    Tab(text: "Total Production "),
+                    Tab(text: "Operation Rate"),
+                    Tab(text: "Working Time"),
+                  ],
+                ),
+              ),
+              body: TabBarView(
+                children: [
+                  Production.withSampleData(),
+                  Operation.withSampleData(),
+                  workingTime.withSampleData(),
+                  //ShiftA(),
+                  //ShiftB(),
+                ],
+              ),
+              floatingActionButton: Builder(
+                builder: (context) =>
+                    FloatingActionButton(
+                      backgroundColor: Colors.deepPurple,
+                      onPressed: () {
+                        showMonthPicker(
+                          context: context,
+                          firstDate: DateTime(DateTime.now().year - 1, 5),
+                          lastDate: DateTime(DateTime.now().year + 3, 5),
+                          initialDate: DateTime.now(),
+                          locale: const Locale("en"),).then((date) {
+                          if (date != null) {
+                            setState(() {
+                              selectedDate = date;
+                            });
+                          }
+                        });
+                      },
+                      child: const Icon(Icons.calendar_month_outlined),
                     ),
-                  ),
-                  body: TabBarView(
-                    children: [
-                      Production.withSampleData(),
-                      Operation.withSampleData(),
-                      workingTime.withSampleData(),
-                      //ShiftA(),
-                      //ShiftB(),
-                    ],
-                  )
-              )));
-    }
+              ),
+            )));
+  }
+}
 
 
   // ShiftA() {
@@ -155,4 +187,4 @@ class Wone extends StatelessWidget {
 //   Production(this.year, this.sales);
 // }
 
-  }
+
