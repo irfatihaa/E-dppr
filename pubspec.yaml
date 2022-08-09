@@ -35,6 +35,9 @@ dependencies:
   fl_chart: ^0.45.1
   flutter_radar_chart: ^0.2.1
   multi_charts: ^0.3.0
+  intl: ^0.17.0
+  month_year_picker: ^0.2.0+1
+  month_picker_dialog: ^0.3.0
   flutter:
     sdk: flutter
   stacked_themes:
